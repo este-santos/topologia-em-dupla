@@ -1,0 +1,30 @@
+enable
+config ter
+username DUPLA privilege 15 secret DUPLA	
+hostname RT-01
+enable secret DUPLA
+ip domain-name 1rede.local
+line console 0
+password DUPLA
+login local
+exit
+line vty 0 15 
+password DUPLA
+transport input ssh
+login local
+exit
+crypto key generate rsa general-keys modulus 1024 
+service password-encryption
+interface g0/1
+ip address 172.16.0.1 255.255.0.0
+no shutdown
+description INTERFACE  DE GERENCIAMENTO--SW-02
+exit
+interface g0/0
+ip address 192.168.0.1 255.255.255.0
+no shutdown
+description INTERFACE  DE GERENCIAMENTO--SW-01
+exit
+end
+wr
+
